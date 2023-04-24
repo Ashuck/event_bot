@@ -116,7 +116,7 @@ def get_event_list(message: Message, user):
             print(event)
             event: Event
             text = f"Мероприятие \"{event.title}\"\n"
-            text += f"Состоится {event.on_time.strftime('%d.%m.%Y')} в {event.on_time.strftime('%H:%M')}"
+            text += f"Состоится {event.on_time.strftime('%d.%m.%Y')} в {event.on_time.strftime('%H:%M')} до {event.end_time.strftime('%H:%M')}"
             kbr = InlineKeyboardMarkup()
             kbr.add(
                 InlineKeyboardButton("Записаться", callback_data=f"event_{event.id}")
@@ -151,7 +151,7 @@ def choose_event(calback: CallbackQuery, user: User):
         session.commit()
         bot.send_message(
             chat_id=user.tg_id,
-            text="Заявка на регистрацию отправлена"
+            text="Ваша заявка принята, мы свяжемся с вами в ближайшее время."
         )
         email_body = email_template.format(
             username=user.name,
