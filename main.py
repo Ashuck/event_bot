@@ -190,7 +190,7 @@ def get_contact(message: Message):
     need_comment.add(user.tg_id)
     bot.send_message(
         chat_id=user.tg_id,
-        text="Теперь укажите Ваш email и как к Вам обращаться (в одном сообщении)",
+        text="Теперь укажите одним сообщением Ваш email, как к Вам обращаться и какую организацию Вы представляете.",
     )
 
 
