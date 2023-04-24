@@ -25,7 +25,17 @@ class User(Base):
     
     def __repr__(self) -> str:
         return f"User: {self.name} {self.url}"
-    
+
+
+class Admins(Base):
+    __tablename__ = "admins"
+
+    user = Column(Integer, ForeignKey("users.tg_id"))
+    level = Column(Integer, primary_key=True, autoincrement=True)
+
+    def __repr__(self) -> str:
+        return f"User: {self.user.name} {self.user.url}"
+
 
 class Event(Base):
     __tablename__ = "events"
