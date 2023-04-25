@@ -61,4 +61,4 @@ class Registrations(Base):
     event = Column(Integer, ForeignKey("events.id"))
 
     def __repr__(self) -> str:
-        return f"Reg: {self.user} on {self.event.title}"
+        return f"Reg {self.id}: {self.user} on {self.event}"
