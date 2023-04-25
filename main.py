@@ -51,7 +51,10 @@ def check_user(func):
             user: User = session.query(User).get(message.message.chat.id)
             
         if not user:
-            user = reg_user(message)
+            if isinstance(message, Message):
+                user = reg_user(message)
+            else:
+                user = reg_user(message.message)
 
         if user.phone and user.comment:
             func(message, user)
