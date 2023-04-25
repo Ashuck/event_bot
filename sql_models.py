@@ -18,12 +18,19 @@ class User(Base):
 
     def __init__(self, chat_id, last_name, first_name, username, phone="", comment=""):
         self.tg_id = chat_id
+
         if last_name:
             self.name = first_name + " " + last_name
         else:
             self.name = first_name
+
         self.name = self.name.strip()
-        self.url = f"https://t.me/{username}"
+
+        if username:
+            self.url = f"https://t.me/{username}"
+        else:
+            self.url = "У пользователя не указан никнейм"
+
         self.phone = phone
         self.comment = comment
     
