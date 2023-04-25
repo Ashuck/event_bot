@@ -12,12 +12,16 @@ class User(Base):
     name = Column(String)
     url = Column(String)
     comment = Column(String)
+    email = Column(String, server_default="")
     phone = Column(String)
 
 
     def __init__(self, chat_id, last_name, first_name, username, phone="", comment=""):
         self.tg_id = chat_id
-        self.name = first_name + " " + last_name
+        if last_name:
+            self.name = first_name + " " + last_name
+        else:
+            self.name = first_name
         self.name = self.name.strip()
         self.url = f"https://t.me/{username}"
         self.phone = phone
