@@ -41,20 +41,27 @@ class User(Base):
 class Admins(Base):
     __tablename__ = "admins"
 
-    user = Column(Integer, ForeignKey("users.tg_id"))
-    level = Column(Integer, primary_key=True, autoincrement=True)
+    user = Column(Integer, ForeignKey("users.tg_id"), primary_key=True,)
+    level = Column(Integer, autoincrement=True)
 
     def __repr__(self) -> str:
-        return f"User: {self.user.name} {self.user.url}"
+        return f"User: {self.user}"
 
 
 class Event(Base):
     __tablename__ = "events"
+    modes = {
+        "период": "period",
+        "ко времени": "on_time",
+        "дата": "on_date"
+    }
 
     id = Column(Integer, primary_key=True, autoincrement=True)
     title = Column(String)
+    mode = Column(String)
     on_time = Column(DateTime)
     end_time = Column(DateTime)
+
 
     def __repr__(self) -> str:
         return f"Event: {self.title} {self.on_time}"
