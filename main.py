@@ -247,7 +247,7 @@ def choose_event(calback: CallbackQuery, user: User):
     else:
         bot.send_message(
             chat_id=user.tg_id,
-            text=f"Вы уже отправляли заявку на мероприятие {event.title}"
+            text=f"Вы уже отправляли заявку на мероприятие \"{event.title}\""
         )
 
 
@@ -322,6 +322,9 @@ def remove_event(calback: CallbackQuery, user: User):
             event_id = int(calback.data.split("_")[1])
             event: Event = session.query(Event).get(event_id)
             if event:
+                reg = session.query(Registrations).filter_by(
+                    event=event.id
+                ).delete()
                 session.delete(event)
                 session.commit()
                 text = "Мероприятие удалено"
