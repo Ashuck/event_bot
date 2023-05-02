@@ -123,7 +123,8 @@ def add_info(message: Message):
         "chat_id": user.tg_id,
     }
     if need_info[user.tg_id] == "phone":
-        user.phone = message.text
+        if message.text:
+            user.phone = message.text
         session.commit()
         args['text'] = "Я запомнил Ваш номер телефона. Теперь Вы можете выбрать мероприятие."
         args['reply_markup'] = main_board
